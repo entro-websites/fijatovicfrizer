@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frizerski salon Fijatović | Mileševska 66, Vračar</title>
+<meta name="description" content="Porodični frizerski salon Fijatović na Vračaru. 145 godina tradicije, pet generacija frizera. Farbanje, ispravljanje kose, pramenovi, šišanje. Zakaži termin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#8f2931;
+    --accent-dark:#6b1f26;
+    --accent-light:#b8535c;
+    --accent-soft:#f7e8ea;
+    --accent-glow:rgba(143,41,49,0.16);
+
+    --text:#221316;
+    --text-muted:rgba(34,19,22,0.68);
+    --text-faint:rgba(34,19,22,0.46);
+
+    --border:rgba(34,19,22,0.1);
+    --bg:#fdfaf9;
+
+    --radius-btn:6px;
+    --radius-card:18px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Open Sans', sans-serif;
+    font-weight:400;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+    font-size:16px;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Playfair Display', serif;
+    color:var(--text);
+    line-height:1.15;
+    font-weight:700;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width:1280px;
+    margin:0 auto;
+    padding-left:24px;
+    padding-right:24px;
+  }
+
+  @media (max-width:768px){
+    .wrap{ padding-left:20px; padding-right:20px; }
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Open Sans', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:15px 30px;
+    border-radius:var(--radius-btn);
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:background 0.25s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#fff;
+  }
+  .btn-primary:hover{
+    background:var(--accent-dark);
+    box-shadow:0 10px 30px var(--accent-glow);
+    transform:translateY(-1px);
+  }
+  .btn-outline{
+    background:transparent;
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .btn-outline:hover{
+    background:var(--accent-soft);
+  }
+  .btn svg{ width:18px; height:18px; flex-shrink:0; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    transition:background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(14px);
+    box-shadow:0 8px 26px rgba(34,19,22,0.06);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+  .logo img{ height:44px; width:auto; }
+  .logo{ display:flex; align-items:center; }
+
+  nav.nav-desktop{
+    display:flex;
+    align-items:center;
+    gap:38px;
+  }
+  nav.nav-desktop a{
+    font-size:15px;
+    font-weight:600;
+    color:var(--text-muted);
+    transition:color 0.2s ease;
+  }
+  nav.nav-desktop a:hover{ color:var(--accent); }
+
+  .header-cta{ display:flex; align-items:center; gap:20px; }
+
+  .hamburger{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+    flex-direction:column;
+    gap:5px;
+  }
+  .hamburger span{
+    display:block;
+    width:26px;
+    height:2px;
+    background:var(--text);
+    transition:transform 0.25s ease, opacity 0.25s ease;
+  }
+  .hamburger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2){ opacity:0; }
+  .hamburger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu{
+    display:none;
+    flex-direction:column;
+    background:#fff;
+    border-top:1px solid var(--border);
+    overflow:hidden;
+    max-height:0;
+    transition:max-height 0.3s ease;
+  }
+  .mobile-menu.open{ max-height:420px; }
+  .mobile-menu .wrap{
+    display:flex;
+    flex-direction:column;
+    padding-top:18px;
+    padding-bottom:24px;
+    gap:16px;
+  }
+  .mobile-menu a{
+    font-size:16px;
+    font-weight:600;
+    color:var(--text);
+    padding-top:6px;
+    padding-bottom:6px;
+  }
+  .mobile-menu .btn{ margin-top:6px; justify-content:center; width:100%; }
+
+  @media (max-width:991px){
+    nav.nav-desktop, .header-cta{ display:none; }
+    .hamburger{ display:flex; }
+    .mobile-menu{ display:flex; }
+  }
+
+  /* ---------- SECTION SPACING ---------- */
+  section{
+    padding-top:96px;
+    padding-bottom:96px;
+  }
+  @media (max-width:768px){
+    section{ padding-top:64px; padding-bottom:64px; }
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--accent);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:2px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  p.lead{
+    color:var(--text-muted);
+    font-size:17px;
+    max-width:640px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top:72px;
+    padding-bottom:88px;
+    background:linear-gradient(180deg, var(--accent-soft) 0%, var(--bg) 70%);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 3.6rem);
+    margin-bottom:22px;
+  }
+  .hero p.lead{ margin-bottom:34px; }
+  .hero-stats{
+    display:flex;
+    gap:36px;
+    margin-top:40px;
+  }
+  .hero-stats div{ display:flex; flex-direction:column; }
+  .hero-stats strong{
+    font-family:'Playfair Display', serif;
+    font-size:2rem;
+    color:var(--accent);
+  }
+  .hero-stats span{
+    font-size:13px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .hero-image{
+    background:#e4dcdb;
+    border-radius:var(--radius-card);
+    height:420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-faint);
+    font-weight:700;
+    text-align:center;
+    padding-left:20px;
+    padding-right:20px;
+    font-size:14px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    border:1px solid var(--border);
+  }
+
+  @media (max-width:900px){
+    .hero .wrap{ grid-template-columns:1fr; gap:40px; }
+    .hero-image{ height:280px; order:-1; }
+    .hero-stats{ gap:26px; flex-wrap:wrap; }
+  }
+
+  /* ---------- PAIN INTRO ---------- */
+  .pain{
+    background:#fff;
+  }
+  .pain .wrap{
+    max-width:840px;
+    text-align:center;
+  }
+  .pain h2{ font-size:clamp(1.7rem,3vw,2.2rem); margin-bottom:20px; }
+  .pain p{
+    color:var(--text-muted);
+    font-size:17px;
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  /* ---------- USLUGE ---------- */
+  .usluge{ background:var(--accent-soft); }
+  .usluge-head{ max-width:640px; margin-bottom:56px; }
+  .usluge-head h2{ font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:16px; }
+
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .service-card{
+    background:#fff;
+    border-radius:var(--radius-card);
+    padding:34px 28px;
+    border:1px solid var(--border);
+    transition:box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .service-card:hover{
+    box-shadow:0 22px 48px rgba(34,19,22,0.08);
+    transform:translateY(-3px);
+  }
+  .service-icon{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:var(--accent-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+  }
+  .service-icon svg{ width:24px; height:24px; stroke:var(--accent); }
+  .service-card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .service-card p{
+    color:var(--text-muted);
+    font-size:15px;
+    max-width:340px;
+  }
+
+  @media (max-width:900px){
+    .services-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:600px){
+    .services-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- O BRENDU ---------- */
+  .o-nama .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .o-nama h2{ font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:22px; }
+  .o-nama p{ color:var(--text-muted); font-size:16px; max-width:520px; margin-bottom:18px; }
+
+  .brand-image{
+    background:#e4dcdb;
+    border-radius:var(--radius-card);
+    height:440px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--text-faint);
+    font-weight:700;
+    text-align:center;
+    padding-left:20px;
+    padding-right:20px;
+    font-size:14px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    border:1px solid var(--border);
+  }
+
+  .stats-row{
+    display:flex;
+    gap:40px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .stats-row div{ display:flex; flex-direction:column; }
+  .stats-row strong{
+    font-family:'Playfair Display', serif;
+    font-size:2.2rem;
+    color:var(--accent);
+  }
+  .stats-row span{
+    font-size:13px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    max-width:160px;
+  }
+
+  @media (max-width:900px){
+    .o-nama .wrap{ grid-template-columns:1fr; gap:36px; }
+    .brand-image{ height:280px; }
+  }
+
+  /* ---------- KONTAKT / CTA ---------- */
+  .kontakt{
+    background:var(--accent);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .kontakt::before{
+    content:"";
+    position:absolute;
+    top:-140px;
+    right:-140px;
+    width:420px;
+    height:420px;
+    background:radial-gradient(circle, rgba(255,255,255,0.14) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .kontakt .wrap{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  .kontakt h2{
+    color:#fff;
+    font-size:clamp(1.9rem,3.4vw,2.5rem);
+    margin-bottom:18px;
+  }
+  .kontakt p{
+    color:rgba(255,255,255,0.85);
+    font-size:16px;
+    max-width:480px;
+    margin-bottom:30px;
+  }
+  .kontakt .btn-primary{
+    background:#fff;
+    color:var(--accent);
+  }
+  .kontakt .btn-primary:hover{
+    background:#f2e6e7;
+    box-shadow:none;
+  }
+  .kontakt-info{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:var(--radius-card);
+    padding:32px;
+  }
+  .kontakt-info .row{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-bottom:20px;
+  }
+  .kontakt-info .row:last-child{ margin-bottom:0; }
+  .kontakt-info svg{ width:22px; height:22px; stroke:#fff; flex-shrink:0; margin-top:2px; }
+  .kontakt-info strong{ display:block; font-size:15px; margin-bottom:4px; }
+  .kontakt-info span{ font-size:14px; color:rgba(255,255,255,0.8); }
+
+  @media (max-width:900px){
+    .kontakt .wrap{ grid-template-columns:1fr; gap:32px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:#1c1112;
+    color:rgba(255,255,255,0.7);
+    padding-top:56px;
+    padding-bottom:32px;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:36px;
+    padding-bottom:32px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand img{ height:38px; margin-bottom:14px; filter:brightness(0) invert(1); opacity:0.9; }
+  .footer-brand p{ font-size:14px; max-width:280px; color:rgba(255,255,255,0.55); }
+  .footer-links{ display:flex; gap:56px; flex-wrap:wrap; }
+  .footer-col h4{
+    font-family:'Open Sans', sans-serif;
+    color:#fff;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:14px;
+  }
+  .footer-col a, .footer-col span{
+    display:block;
+    font-size:14px;
+    color:rgba(255,255,255,0.6);
+    margin-bottom:10px;
+  }
+  .footer-col a:hover{ color:#fff; }
+  .footer-bottom{
+    padding-top:24px;
+    font-size:13px;
+    color:rgba(255,255,255,0.4);
+    text-align:center;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:1;
+    transform:translateY(12px);
+    transition:transform 0.6s ease, opacity 0.6s ease;
+  }
+  .reveal.is-visible{ transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap header-inner">
+    <a href="#" class="logo">
+      <img src="assets/logo.png" alt="Frizerski salon Fijatović logo">
+    </a>
+    <nav class="nav-desktop">
+      <a href="#usluge">Usluge</a>
+      <a href="#o-nama">O nama</a>
+      <a href="#">Utisci klijenata</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:0112440125" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.33 1.96.6 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.94.27 1.91.47 2.9.6A2 2 0 0 1 22 16.92z"/></svg>
+        011/2440-125
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Otvori meni" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="wrap">
+      <a href="#usluge">Usluge</a>
+      <a href="#o-nama">O nama</a>
+      <a href="#">Utisci klijenata</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="tel:0112440125" class="btn btn-primary">Pozovi: 011/2440-125</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <div>
+        <h1>145 godina brinemo o kosi Vračara</h1>
+        <p class="lead">Pet generacija porodice Fijatović boji, šiša i ispravlja kosu u istom salonu na Mileševskoj. Javi se telefonom i zakaži termin kod frizera kome zaista možeš da veruješ.</p>
+        <a href="tel:0112440125" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.33 1.96.6 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.94.27 1.91.47 2.9.6A2 2 0 0 1 22 16.92z"/></svg>
+          Pozovi i zakaži termin
+        </a>
+        <div class="hero-stats">
+          <div>
+            <strong>145</strong>
+            <span>Godina tradicije</span>
+          </div>
+          <div>
+            <strong>5</strong>
+            <span>Generacija frizera</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image" aria-hidden="true">FOTOGRAFIJA ENTERIJERA SALONA FIJATOVIĆ</div>
+    </div>
+  </section>
+
+  <!-- BOL UVOD -->
+  <section class="pain reveal">
+    <div class="wrap">
+      <h2>Poznato ti je ovo?</h2>
+      <p>Verovatno si već sedela u stolici frizera koji ti je obećao boju iz snova, a dobila si suvu kosu i šišanje koje ne liči na ono što si tražila. Kad znanje kroz pet generacija stoji iza svake makaze, tačno se zna šta kosi treba. Kod nas ne rizikuješ boju ni oblik - radimo isto ono što radimo 145 godina, samo modernijim tehnikama.</p>
+    </div>
+  </section>
+
+  <!-- USLUGE -->
+  <section class="usluge" id="usluge">
+    <div class="wrap">
+      <div class="usluge-head reveal">
+        <span class="eyebrow">Šta radimo</span>
+        <h2>Usluge kojima se bavimo pet generacija</h2>
+        <p class="lead">Od farbanja do ispravljanja kose, svaku uslugu radimo rukama koje ovo znanje nose iz kuće, ne sa kursa od vikenda.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-6 7-6 12a6 6 0 0 0 12 0c0-5-6-12-6-12z"/></svg>
+          </div>
+          <h3>Farbanje kose</h3>
+          <p>Boja koja izgleda prirodno i traje, birana prema tvom tonu kože i strukturi kose.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>
+          </div>
+          <h3>Minival voćnim kiselinama</h3>
+          <p>Nežno čišćenje i obnavljanje kože glave i kose voćnim kiselinama, pre farbanja ili posle njega.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7c4 0 4 5 9 5s5-5 9-5"/><path d="M4 18h16"/></svg>
+          </div>
+          <h3>Trajno i keratinsko ispravljanje</h3>
+          <p>Kovrdžavu ili neposlušnu kosu ispravljamo trajno ili keratinski, u zavisnosti od toga šta tvojoj kosi treba.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l6-15M10 20l6-15M16 20l4-9"/></svg>
+          </div>
+          <h3>Pramenovi, balajaž, ombre</h3>
+          <p>Od suptilnih pramenova do potpune promene tona, radimo tehnike koje se danas traže u Beogradu.</p>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 7.5L20 18M8.5 16.5L20 6"/></svg>
+          </div>
+          <h3>Šišanje i oblikovanje</h3>
+          <p>Šišanje za žene, muškarce i decu, oblikovano prema obliku lica i teksturi kose.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- O BRENDU -->
+  <section class="o-nama" id="o-nama">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">O salonu</span>
+        <h2>Salon koji Vračar pamti od pradede do unuka</h2>
+        <p>Salon Fijatović radi na istoj adresi, Mileševska 66, punih 145 godina. Kroz pet generacija, znanje se prenosilo sa oca na sina, sa majke na ćerku - zanat se učio u ovom istom prostoru, ne na kursu od vikenda.</p>
+        <p>Danas kosu rade unuci i unuke onih koji su salon osnovali, sa istom pažnjom prema kosi kao i njihovi preci. To je razlog zašto se klijenti vraćaju godinama, ne samo jednom.</p>
+        <div class="stats-row">
+          <div>
+            <strong>145</strong>
+            <span>Godina tradicije na Vračaru</span>
+          </div>
+          <div>
+            <strong>5</strong>
+            <span>Generacija frizera u porodici</span>
+          </div>
+          <div>
+            <strong>66</strong>
+            <span>Mileševska, ista adresa od početka</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-image reveal" aria-hidden="true">FOTOGRAFIJA TIMA FRIZERA FIJATOVIĆ</div>
+    </div>
+  </section>
+
+  <!-- KONTAKT / CTA -->
+  <section class="kontakt" id="kontakt">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>Zakaži termin i dođi na Mileševsku 66</h2>
+        <p>Pozovi salon, reci koju uslugu tražiš i dogovori termin koji ti odgovara. Nema online zakazivanja koje kasni - javljaš se telefonom i rezervišeš svoj termin direktno.</p>
+        <a href="tel:0112440125" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.33 1.96.6 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.94.27 1.91.47 2.9.6A2 2 0 0 1 22 16.92z"/></svg>
+          Pozovi: 011/2440-125
+        </a>
+      </div>
+      <div class="kontakt-info reveal">
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <strong>Adresa</strong>
+            <span>Mileševska 66, Vračar, Beograd</span>
+          </div>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.33 1.96.6 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.94.27 1.91.47 2.9.6A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <strong>Telefon</strong>
+            <span>011/2440-125</span>
+          </div>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div>
+            <strong>Radno vreme</strong>
+            <span>Radnim danima i subotom, po dogovoru na telefon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Frizerski salon Fijatović logo">
+        <p>Porodični frizerski salon na Vračaru. Pet generacija znanja, ista adresa, 145 godina.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Salon</h4>
+          <a href="#usluge">Usluge</a>
+          <a href="#o-nama">O nama</a>
+          <a href="#">Utisci klijenata</a>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <span>Mileševska 66, Vračar</span>
+          <span>011/2440-125</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Frizerski salon Fijatović. Sva prava zadržana.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header blur on scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 10){
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburgerBtn.addEventListener('click', function(){
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerBtn.classList.toggle('active');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('active');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll reveal
+  if('IntersectionObserver' in window){
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  }
+</script>
+
+</body>
+</html>
